@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+
+main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text("列表测试"),
+            ),
+            body: ListView.separated(
+              itemBuilder: (BuildContext context, int index) {
+                return Text('Item$index');
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider();
+              },
+              itemCount: 50,
+            )));
+  }
+}
+
+class ListViewDemo2 extends StatelessWidget {
+  const ListViewDemo2({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 100,
+      itemExtent: 70,
+      itemBuilder: ((BuildContext ctx, int index) {
+        return Text(
+          "hello world:${index + 1}",
+          style: TextStyle(fontSize: 30),
+        );
+      }),
+    );
+  }
+}
+
+class ListViewDemo1 extends StatelessWidget {
+  const ListViewDemo1({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: List.generate(100, (index) {
+        return ListTile(
+          leading: Icon(Icons.people),
+          trailing: Icon(Icons.delete),
+          title: Text("联系人$index"),
+          subtitle: Text("17601015631"),
+        );
+      }),
+    );
+  }
+}

@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+
+main() => runApp(MyApp());
+/*
+* Widget:
+*  有状态的Widget：StatefulWidget 在运行过程中有一些状态(data)需要改变
+*  无状态的Widget：StatelessWidget 内容是确定没有状态(data)需要改变
+* */
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      //右上角debug图标去掉
+      debugShowCheckedModeBanner: false,
+      home: MJHomePage(),
+    );
+  }
+}
+
+class MJHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //Scaffold 脚手架的作用就是搭建页面的基本结构
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("第一个flutter程序"),
+      ),
+      body: MJContentBody(),
+    );
+  }
+}
+/*
+* 所有的widget都不能定义可变变量 因为Widget类上面用了一个注解：
+*   @immutable 也就是说 当前类中所有变量都是final的 不可变的
+* 所以需要一个State类来定义状态
+* */
+class MJContentBody extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MJContentBodyState();
+  }
+}
+
+class MJContentBodyState extends State<MJContentBody> {
+  var flag = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Checkbox(
+              value: flag,
+              onChanged: (value) {
+                setState(() {
+                  flag = value;
+                });
+              }),
+          Text(
+            "同意协议",
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
+  }
+}

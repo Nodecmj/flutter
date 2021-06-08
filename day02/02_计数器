@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+
+main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MJHomePage(),
+    );
+  }
+}
+
+class MJHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(title: Text("新的")), body: MJHomeBody());
+  }
+}
+
+class MJHomeBody extends StatefulWidget {
+  final message = "程明杰";
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MJHomeState();
+  }
+}
+
+class _MJHomeState extends State<MJHomeBody> {
+  var count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            _getButton(0, "-1"),
+            _getButton(1, "+1"),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text("当前计数:$count"),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text(
+              "你好啊${widget.message}",
+              style: TextStyle(fontSize: 26, color: Colors.orange),
+            ),
+          ]),
+        ],
+      ),
+    );
+  }
+
+  Widget _getButton(int type, String text) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          if (type == 0) {
+            count--;
+          } else {
+            count++;
+          }
+        });
+      },
+      child: Text(text),
+    );
+  }
+}

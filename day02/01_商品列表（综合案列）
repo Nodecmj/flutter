@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+
+main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MJHomePage(),
+    );
+  }
+}
+
+class MJHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("商品列表")),
+      body: MJHomeBody(),
+    );
+  }
+}
+
+class MJHomeBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ListView(
+        children: <Widget>[
+          MJHomeProductItem("商品标题1", "商品描述1",
+              "https://img1.baidu.com/it/u=2496571732,442429806&fm=26&fmt=auto&gp=0.jpg"),
+          SizedBox(
+            height: 6,
+          ),
+          MJHomeProductItem("商品标题2", "商品描述2",
+              "https://img2.baidu.com/it/u=3681880960,455182084&fm=26&fmt=auto&gp=0.jpg"),
+          SizedBox(
+            height: 6,
+          ),
+          MJHomeProductItem("商品标题3", "商品描述3",
+              "https://img1.baidu.com/it/u=2526580938,627798856&fm=26&fmt=auto&gp=0.jpg"),
+        ],
+      ),
+    );
+  }
+}
+
+class MJHomeProductItem extends StatelessWidget {
+  final String title;
+  final String desc;
+  final String imageUrl;
+
+  MJHomeProductItem(this.title, this.desc, this.imageUrl);
+
+  @override
+  Widget build(BuildContext context) {
+    final style1 = TextStyle(fontSize: 26, color: Colors.orange);
+    final style2 = TextStyle(fontSize: 20, color: Colors.green);
+
+    return Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: 2, //设置边框宽度
+                color: Colors.blue)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              title,
+              style: style1,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              desc,
+              style: style2,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Image.network(imageUrl)
+          ],
+        ));
+  }
+}
